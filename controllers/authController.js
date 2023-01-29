@@ -68,6 +68,23 @@ const allUsers = async (req,res,next) => {
   })
 }
 
+const deleteUser = (req,res,next) => {
+  try{
+    User.findByIdAndDelete({_id: req.params.id})
+      .then(data => {
+        res.status(200).json({
+          success: true,
+          message: "User deleted!"
+        })
+      })
+  } catch(err){
+    res.status(200).json({
+      success: false,
+      message : "Some internal error occured!"
+    })
+  }
+}
+
 module.exports = {
-  createUser, allUsers, loginUser
+  createUser, allUsers, loginUser, deleteUser
 }

@@ -1,6 +1,24 @@
 const User = require("../models/Users.js");
 const jwt  = require("jsonwebtoken");
 
+// Authentication function!
+function isAuth(req, res, next){
+    let username = "username"
+    let password = "password"
+    const authHeader = req.headers.authorization
+    var auth = new Buffer.from(authHeader.split(' ')[1],
+    'base64').toString().split(':');
+    var user = auth[0];
+    var pass = auth[1];
+    if(user === username && pass === password){
+      next();
+    } else {
+      res.status(401).json({
+        message : "Access forbidden"
+      })
+    }
+}
+
 const createUser = async(req,res,next) => {
   try{
     const user = new User({
@@ -86,5 +104,5 @@ const deleteUser = (req,res,next) => {
 }
 
 module.exports = {
-  createUser, allUsers, loginUser, deleteUser
+  createUser, allUsers, loginUser, deleteUser, isAuth
 }

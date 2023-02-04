@@ -12,6 +12,6 @@ router.post("/loginuser", userController.loginUser);
 router.delete("/:id/deleteuser", userController.deleteUser);
 
 // Testing routes -- Delete later!
-router.get("/alluserstest/", specController.specTest);
+router.get("/alluserstest/", userController.isAuth, specController.specTest);
 
 module.exports = router;

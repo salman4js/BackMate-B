@@ -34,7 +34,7 @@ async function addReport(req,res,next){
 // Get all the report for the particular user!
 async function getReport(req,res,next){
   try{
-    const reports = await Reports.find({user: req.body.user});
+    const reports = await Reports.find({user: req.body.userId});
     res.status(200).json({
       success: true,
       message: reports

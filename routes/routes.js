@@ -13,7 +13,8 @@ router.post("/loginuser", userController.loginUser);
 router.delete("/:id/deleteuser", userController.deleteUser);
 
 // Reports Routes!
-router.get('/allreports', reportController.getReport);
+router.post('/allreports', reportController.getReport);
+router.post('/addreport', reportController.addReport);
 
 // Testing routes -- Delete later!
 router.get("/alluserstest/", userController.isAuth, specController.specTest);

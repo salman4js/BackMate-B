@@ -27,14 +27,12 @@ const createUser = async(req,res,next) => {
       password: req.body.password
     })
     await user.save();
-    res.status(200).json({
-      status: 201,
+    res.status(201).json({
       success : true,
       message : "User added"
     })
   } catch(err){
-    res.status(200).json({
-      status: 500,
+    res.status(500).json({
       success: false,
       message : "Some internal error occured"
     })
@@ -49,7 +47,7 @@ const loginUser = (req,res,next) => {
       .then(data => {
         if(data){
           if(data.password !== password){
-            res.status(200).json({
+            res.status(400).json({
               success: false,
               message : "Please check the credentials"
             })
@@ -64,14 +62,14 @@ const loginUser = (req,res,next) => {
             })
           }
         } else {
-          res.status(200).json({
+          res.status(400).json({
             success: false,
             message: "User not found"
           })
         }
       })
   } catch(err){
-    res.status(200).json({
+    res.status(404).json({
       success : false,
       message : "Some internal error occured!"
     })
@@ -96,7 +94,7 @@ const deleteUser = (req,res,next) => {
         })
       })
   } catch(err){
-    res.status(200).json({
+    res.status(404).json({
       success: false,
       message : "Some internal error occured!"
     })

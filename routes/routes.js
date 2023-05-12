@@ -15,6 +15,7 @@ router.delete("/:id/deleteuser", userController.deleteUser);
 // Reports Routes!
 router.post('/allreports', reportController.getReport);
 router.post('/addreport', reportController.addReport);
+router.delete('/deletereport', reportController.deleteReport);
 
 // Testing routes -- Delete later!
 router.get("/alluserstest/", userController.isAuth, specController.specTest);

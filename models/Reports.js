@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const reportSchema = new mongoose.Schema({
   storyName: String,
+  apiName: String,
+  authorName: String,
   scenarioName: String,
   actualResult: Array,
   expectedResult: Array,

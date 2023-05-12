@@ -62,7 +62,7 @@ const loginUser = (req,res,next) => {
             })
           }
         } else {
-          res.status(400).json({
+          res.status(401).json({
             success: false,
             message: "User not found"
           })

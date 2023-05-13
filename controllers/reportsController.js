@@ -23,7 +23,7 @@ async function addReport(req,res,next){
     await report.save();
     res.status(200).json({
       success: true,
-      message: "Report generated for the test case!"
+      message: "Report generated and saved for the test case!"
     })
   } catch(err){
     res.status(404).json({

@@ -51,7 +51,6 @@ async function getReport(req,res,next){
 
 // Delete specific report of the user!
 async function deleteReport(req,res,next){
-  console.log("Request body", req.body)
   // Delete the reference of the report in the user schema!
   await User.findByIdAndUpdate({_id: req.body.userId}, {$pull : {reports : req.body.reportId}})
   

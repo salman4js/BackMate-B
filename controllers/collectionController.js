@@ -3,10 +3,16 @@ const Links = require("../models/Collections.js");
 
 // Add collections to the user schema!
 async function addCollections(req,res,next){
+  
+  // Convert request body which is coming as a object to string!
+  const requestBody = JSON.stringify(req.body.body)
+    
   try{
      const link = new Links({
-       link: req.body.link,
-       method: req.body.method,
+       link: req.body.url,
+       method: req.body.mode,
+       reqBody: requestBody,
+       date: req.body.date,
        user: req.body.userId
      })
      

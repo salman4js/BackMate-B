@@ -1,5 +1,7 @@
 const User = require("../models/Users.js");
 const Links = require("../models/Collections.js");
+const brewDate = require('brew-date');
+const commonFunctions = require('../commonImplementations/common.functions');
 
 // Add collections to the user schema!
 async function addCollections(req,res,next){
@@ -38,16 +40,33 @@ async function addCollections(req,res,next){
 async function getCollections(req,res,next){
   try{
     const links = await Links.find({user: req.body.userId});
+    const structedData = structureData(links);
     res.status(200).json({
       success: true,
-      message: links
+      message: structedData
     })
   } catch(err){
-    res.status(404).json({
+    res.status(500).json({
       success: false,
       message: "Internal error occured."
     })
   }
+}
+
+// Customize the getCollection result in order to have properly structured data!
+function structureData(results){
+  // Grouping the values by date
+  const groupedData = {};
+  for (const item of results) {
+    const { date, link, method } = item;
+    if (!groupedData[date]) {
+      groupedData[date] = { date, links: [] };
+    }
+    groupedData[date].links.push({ url: link, method });
+  }
+  // Converting the grouped data object to an array of values
+  const groupedDataArray = Object.values(groupedData);
+  return groupedDataArray
 }
 
 // Delete collection to the user schema!
@@ -64,14 +83,35 @@ async function deleteCollection(req,res,next){
       })
     })
     .catch(err => {
-      res.status(404).json({
+      res.status(500).json({
         success: false,
         message: "Some internal error occured!"
       })
     })
 }
 
+async function deleteAllCollection(req,res,next){
+
+  // Delete the reference of the collection in the user schema!
+  const updatedUser = await User.findByIdAndUpdate({_id: req.body.userId}, { $set: { link: [] } }, { new: true })
+
+  Links.deleteMany({})
+    .then(data => {
+      res.status(200).json({
+        success: true,
+        message: "Collections has been deleted!"
+      })
+    })
+    .catch(err => {
+      res.status(500).json({
+        success: false,
+        message: "Internal error occured."
+      })
+    })
+  
+}
+
 
 module.exports = {
-  addCollections, getCollections, deleteCollection
+  addCollections, getCollections, deleteCollection, deleteAllCollection
 }

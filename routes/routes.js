@@ -22,6 +22,7 @@ router.delete('/deletereport', reportController.deleteReport);
 router.post("/addcollections", collectionController.addCollections);
 router.post('/allcollections', collectionController.getCollections);
 router.delete("/deletecollections", collectionController.deleteCollection);
+router.delete("/deleteallcollections", collectionController.deleteAllCollection);
 
 // Testing routes -- Delete later!
 router.get("/alluserstest/", userController.isAuth, specController.specTest);

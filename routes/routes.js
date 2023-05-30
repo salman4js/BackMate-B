@@ -17,6 +17,7 @@ router.delete("/:id/deleteuser", userController.deleteUser);
 router.post('/allreports', reportController.getReport);
 router.post('/addreport', reportController.addReport);
 router.delete('/deletereport', reportController.deleteReport);
+router.delete('/deleteallreport', reportController.deleteAllReport);
 
 // Collection routes!
 router.post("/addcollections", collectionController.addCollections);
@@ -26,5 +27,6 @@ router.delete("/deleteallcollections", collectionController.deleteAllCollection)
 
 // Testing routes -- Delete later!
 router.get("/alluserstest/", userController.isAuth, specController.specTest);
+router.get('/spectest2', specController.specTest2);
 
 module.exports = router;

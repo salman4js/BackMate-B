@@ -7,6 +7,26 @@ const specTest = (req,res,next) => {
   })
 }
 
+const specTest2 = (req, res, next) => {
+  
+  const data = [
+    {
+      "date" : "string",
+      "links": [
+        {
+          "url" : "url",
+          "method" : "method"
+        }
+      ]
+    }
+  ]
+  
+  res.status(200).json({
+    success: true,
+    message: data
+  })
+}
+
 module.exports = {
-  specTest
+  specTest, specTest2
 }

@@ -7,6 +7,7 @@ const reportSchema = new mongoose.Schema({
   scenarioName: String,
   actualResult: Array,
   expectedResult: Array,
+  success: Boolean,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users"

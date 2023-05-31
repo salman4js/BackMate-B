@@ -58,11 +58,11 @@ function structureData(results){
   // Grouping the values by date
   const groupedData = {};
   for (const item of results) {
-    const { date, link, method } = item;
+    const { date, link, method, reqBody } = item;
     if (!groupedData[date]) {
       groupedData[date] = { date, links: [] };
     }
-    groupedData[date].links.push({ url: link, method });
+    groupedData[date].links.push({ url: link, method, reqBody });
   }
   // Converting the grouped data object to an array of values
   const groupedDataArray = Object.values(groupedData);

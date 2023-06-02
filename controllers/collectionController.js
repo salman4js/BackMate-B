@@ -91,7 +91,6 @@ async function deleteCollection(req,res,next){
 }
 
 async function deleteAllCollection(req,res,next){
-
   // Delete the reference of the collection in the user schema!
   const updatedUser = await User.findByIdAndUpdate({_id: req.body.userId}, { $set: { link: [] } }, { new: true })
 
